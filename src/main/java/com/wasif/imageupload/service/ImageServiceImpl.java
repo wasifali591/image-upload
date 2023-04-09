@@ -72,30 +72,4 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException("Could not load the files!");
         }
     }
-
-    // method for job parameter and jon launcher
-    @Override
-    public void imageFiles(MultipartFile[] file) {
-        // JobParameters jobParameters = new JobParametersBuilder()
-        // .addLong("startAt", System.currentTimeMillis()).toJobParameters();
-        // try {
-        // this.files = Arrays.asList(file);
-        // jobLauncher.run(job, jobParameters);
-        // } catch (JobExecutionAlreadyRunningException | JobRestartException |
-        // JobInstanceAlreadyCompleteException
-        // | JobParametersInvalidException e) {
-        // e.printStackTrace();
-        // }
-    }
-
-    // @Override
-    // public List<MultipartFile> getFiles() {
-    // return this.files;
-    // }
-
-    // @Override
-    // public void setFiles(List<MultipartFile> file) {
-    // this.files = file;
-    // }
-
 }

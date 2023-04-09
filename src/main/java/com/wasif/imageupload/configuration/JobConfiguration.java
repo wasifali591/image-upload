@@ -1,5 +1,6 @@
 package com.wasif.imageupload.configuration;
 
+import com.wasif.imageupload.job.JobListner;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -29,6 +30,8 @@ public class JobConfiguration {
     private JobProcessor jobProcessor;
     @Autowired
     private JobWriter jobWriter;
+    @Autowired
+    private JobListner jobListner;
 
     @Bean
     public Step step() {
@@ -44,8 +47,9 @@ public class JobConfiguration {
     public Job runBatchJob() {
         return jobBuilderFactory.get("job1")
                 .incrementer(new RunIdIncrementer())
-                .start(step())
+                .listener(jobListner)
+                .flow(step())
+                .end()
                 .build();
-        // .flow(step()).end().build();
     }
 }

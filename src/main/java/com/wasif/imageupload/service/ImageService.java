@@ -8,19 +8,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
 
-    public void init();
+    void init();
 
-    public void save(MultipartFile file);
+    void save(MultipartFile file);
 
-    public Resource load(String filename);
+    Resource load(String filename);
 
-    public void deleteAll();
+    void deleteAll();
 
-    public Stream<Path> loadAll();
-
-    public void imageFiles(MultipartFile[] files);
-
-    // public List<MultipartFile> getFiles();
-
-    // public void setFiles(List<MultipartFile> files);
+    Stream<Path> loadAll();
 }
