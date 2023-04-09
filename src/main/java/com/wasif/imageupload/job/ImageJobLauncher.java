@@ -19,8 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StartJob {
-    private static final Logger log = LoggerFactory.getLogger(StartJob.class);
+public class ImageJobLauncher {
+    private static final Logger log = LoggerFactory.getLogger(ImageJobLauncher.class);
 
     @Autowired
     private JobLauncher jobLauncher;

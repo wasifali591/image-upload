@@ -7,7 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 @Configuration
-public class JobProcessor implements ItemProcessor<MultipartFile, MultipartFile> {
+public class ImageJobProcessor implements ItemProcessor<MultipartFile, MultipartFile> {
 
     @Override
     @Nullable

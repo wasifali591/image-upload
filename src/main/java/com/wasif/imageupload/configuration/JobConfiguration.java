@@ -1,6 +1,6 @@
 package com.wasif.imageupload.configuration;
 
-import com.wasif.imageupload.job.JobListner;
+import com.wasif.imageupload.job.ImageJobListner;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wasif.imageupload.job.JobProcessor;
-import com.wasif.imageupload.job.JobReader;
-import com.wasif.imageupload.job.JobWriter;
+import com.wasif.imageupload.job.ImageJobProcessor;
+import com.wasif.imageupload.job.ImageJobReader;
+import com.wasif.imageupload.job.ImageJobWriter;
 
 @Configuration
 @EnableBatchProcessing
@@ -25,21 +25,21 @@ public class JobConfiguration {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
     @Autowired
-    private JobReader jobReader;
+    private ImageJobReader imageJobReader;
     @Autowired
-    private JobProcessor jobProcessor;
+    private ImageJobProcessor imageJobProcessor;
     @Autowired
-    private JobWriter jobWriter;
+    private ImageJobWriter imageJobWriter;
     @Autowired
-    private JobListner jobListner;
+    private ImageJobListner imageJobListner;
 
     @Bean
     public Step step() {
         return stepBuilderFactory.get("setp1")
                 .<MultipartFile, MultipartFile>chunk(2)
-                .reader(jobReader)
-                .processor(jobProcessor)
-                .writer(jobWriter)
+                .reader(imageJobReader)
+                .processor(imageJobProcessor)
+                .writer(imageJobWriter)
                 .build();
     }
 
@@ -47,7 +47,7 @@ public class JobConfiguration {
     public Job runBatchJob() {
         return jobBuilderFactory.get("job1")
                 .incrementer(new RunIdIncrementer())
-                .listener(jobListner)
+                .listener(imageJobListner)
                 .flow(step())
                 .end()
                 .build();

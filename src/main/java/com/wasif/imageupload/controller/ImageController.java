@@ -29,22 +29,22 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import com.wasif.imageupload.exception.StorageException;
 import com.wasif.imageupload.fileManager.FileCache;
-import com.wasif.imageupload.job.StartJob;
+import com.wasif.imageupload.job.ImageJobLauncher;
 import com.wasif.imageupload.message.ResponseMessage;
 import com.wasif.imageupload.model.FileInfo;
 import com.wasif.imageupload.service.ImageService;
 
 @Controller
-public class ImageUploadController {
+public class ImageController {
 
     @Autowired
     ImageService imageService;
 
     @Autowired
-    private StartJob startJob;
+    private ImageJobLauncher imageJobLauncher;
 
     @Autowired
-    private FileCache fieCacheReader;
+    private FileCache fieCache;
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
@@ -77,26 +77,9 @@ public class ImageUploadController {
             throws StorageException, MultipartException, SizeLimitExceededException,
             JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException,
             JobParametersInvalidException {
-        // String message = "";
-        // try {
-        // imageService.setFiles(Arrays.asList(files));
-        // JobParameters jobParameters = new JobParametersBuilder()
-        // .addLong("startAt", System.currentTimeMillis()).toJobParameters();
-        // // this.files = Arrays.asList(file);
-        // jobLauncher.run(job, jobParameters);
-
-        // // message = "Uploaded the files successfully: " + fileNames;
-        // return ResponseEntity.status(HttpStatus.OK).body(new
-        // ResponseMessage(message));
-        // } catch (Exception e) {
-        // message = "Fail to upload files!";
-        // System.out.println(e);
-        // return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new
-        // ResponseMessage(message));
-        // }O
         long reqId = System.currentTimeMillis();
-        fieCacheReader.setFiles(reqId, new ArrayList<>(Arrays.asList(files)));
-        startJob.startFilesJob(reqId);
+        fieCache.setFiles(reqId, new ArrayList<>(Arrays.asList(files)));
+        imageJobLauncher.startFilesJob(reqId);
 
         return "File uploaded successfully.";
     }
@@ -106,7 +89,7 @@ public class ImageUploadController {
         List<FileInfo> fileInfos = imageService.loadAll().map(path -> {
             String filename = path.getFileName().toString();
             String url = MvcUriComponentsBuilder
-                    .fromMethodName(ImageUploadController.class, "getFile", path.getFileName().toString()).build()
+                    .fromMethodName(ImageController.class, "getFile", path.getFileName().toString()).build()
                     .toString();
 
             return new FileInfo(filename, url);

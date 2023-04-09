@@ -16,7 +16,7 @@ import com.wasif.imageupload.fileManager.FileCache;
 
 @Configuration
 @StepScope
-public class JobReader implements ItemReader<MultipartFile> {
+public class ImageJobReader implements ItemReader<MultipartFile> {
 
     @Autowired
     public FileCache fileCacheReader;

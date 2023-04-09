@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wasif.imageupload.service.ImageService;
 
 @Configuration
-public class JobWriter implements ItemWriter<MultipartFile> {
+public class ImageJobWriter implements ItemWriter<MultipartFile> {
     @Autowired
     private ImageService imageService;
 
