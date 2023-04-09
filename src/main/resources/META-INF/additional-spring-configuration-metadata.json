@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "files.storage.location",
+  "type": "java.lang.String",
+  "description": "Destination for uploaded files"
+}]}
