@@ -1,5 +1,9 @@
 package com.wasif.imageupload.exception;
 
+/*
+ * Copyright (c) 2022 Md Wasif Ali.
+ */
+
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 

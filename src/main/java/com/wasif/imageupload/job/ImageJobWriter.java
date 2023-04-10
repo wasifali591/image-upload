@@ -1,5 +1,9 @@
 package com.wasif.imageupload.job;
 
+/*
+ * Copyright (c) 2022 Md Wasif Ali.
+ */
+
 import java.util.List;
 
 import org.springframework.batch.item.ItemWriter;

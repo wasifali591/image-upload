@@ -1,5 +1,9 @@
 package com.wasif.imageupload.job;
 
+/*
+ * Copyright (c) 2022 Md Wasif Ali.
+ */
+
 import java.text.ParseException;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;

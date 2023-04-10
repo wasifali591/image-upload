@@ -1,5 +1,9 @@
 package com.wasif.imageupload.message;
 
+/*
+ * Copyright (c) 2022 Md Wasif Ali.
+ */
+
 public class ResponseMessage {
     private String message;
 

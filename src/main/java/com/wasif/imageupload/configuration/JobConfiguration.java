@@ -1,5 +1,9 @@
 package com.wasif.imageupload.configuration;
 
+/*
+ * Copyright (c) 2023 Md Wasif Ali.
+ */
+
 import com.wasif.imageupload.job.ImageJobListner;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,6 +20,13 @@ import com.wasif.imageupload.job.ImageJobProcessor;
 import com.wasif.imageupload.job.ImageJobReader;
 import com.wasif.imageupload.job.ImageJobWriter;
 
+/**
+ * This is a configuration class for Batch Processing and steps
+ *
+ * @author Md Wasif Ali
+ * @version 1.0
+ * @since 10/04/23
+ */
 @Configuration
 @EnableBatchProcessing
 public class JobConfiguration {
@@ -33,6 +44,11 @@ public class JobConfiguration {
     @Autowired
     private ImageJobListner imageJobListner;
 
+    /**
+     * steps for job
+     *
+     * @return
+     */
     @Bean
     public Step step() {
         return stepBuilderFactory.get("setp1")
@@ -43,6 +59,11 @@ public class JobConfiguration {
                 .build();
     }
 
+    /**
+     * job builder
+     *
+     * @return
+     */
     @Bean
     public Job runBatchJob() {
         return jobBuilderFactory.get("job1")

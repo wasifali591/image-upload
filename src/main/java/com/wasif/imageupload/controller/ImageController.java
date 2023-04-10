@@ -1,5 +1,9 @@
 package com.wasif.imageupload.controller;
 
+/*
+ * Copyright (c) 2023 Md Wasif Ali.
+ */
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +38,14 @@ import com.wasif.imageupload.message.ResponseMessage;
 import com.wasif.imageupload.model.FileInfo;
 import com.wasif.imageupload.service.ImageService;
 
+/**
+ * This is a controller class of File Handling.
+ * It processes multipart images.
+ *
+ * @author Md Wasif Ali
+ * @version 1.0
+ * @since 10/04/23
+ */
 @Controller
 public class ImageController {
 
@@ -46,6 +58,12 @@ public class ImageController {
     @Autowired
     private FileCache fieCache;
 
+    /**
+     * upload bulk image using Multipart functionality
+     *
+     * @param files
+     * @return message
+     */
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
         String message = "";
@@ -67,10 +85,10 @@ public class ImageController {
     }
 
     /**
-     * image upload with batch
+     * bulk image upload with batch
      * 
      * @param files
-     * @return
+     * @return message
      */
     @PostMapping("/image-upload")
     public String imageUpload(@RequestParam("files") MultipartFile[] files)
@@ -84,6 +102,11 @@ public class ImageController {
         return "File uploaded successfully.";
     }
 
+    /**
+     * get a list of uploaded file
+     *
+     * @return list of file information
+     */
     @GetMapping("/files")
     public ResponseEntity<List<FileInfo>> getListFiles() {
         List<FileInfo> fileInfos = imageService.loadAll().map(path -> {
@@ -98,6 +121,12 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
+    /**
+     * download file
+     *
+     * @param filename
+     * @return file
+     */
     @GetMapping("/files/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource file = imageService.load(filename);
